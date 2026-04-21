@@ -23,6 +23,7 @@ def project(vector, subspace_basis):
 
 if __name__ == "__main__":
     from gram_schmidt_algorithm import gram_schmidt_algorithm
+
     basis_0 = gram_schmidt_algorithm([np.random.random_sample(3) for _ in range(3)])
     print(basis_0)
     print(basis_0.dtype)
@@ -30,7 +31,7 @@ if __name__ == "__main__":
         (np.array([1, 1, 0], dtype=basis_0.dtype), basis_0),
         (np.array([1, 0, 1], dtype=basis_0.dtype), basis_0),
         (np.array([0, 1, 1], dtype=basis_0.dtype), basis_0),
-        (np.array([1, 2, 3], dtype=basis_0.dtype), basis_0)
+        (np.array([1, 2, 3], dtype=basis_0.dtype), basis_0),
     ]
 
     for vec, subspace_basis in input_data:

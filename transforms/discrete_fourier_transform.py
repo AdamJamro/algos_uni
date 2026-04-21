@@ -5,18 +5,21 @@ def get_omega(N, k=1.0, inverse=False):
     sign = 1 if inverse else -1
     return np.exp(sign * 2j * np.pi * k / N)
 
+
 def get_omega_array(N, k=1, inverse=False):
     """
     get the k-th array of omega matrix
     """
     omega = get_omega(N, inverse)
-    return omega ** np.arange(0, stop=N*k, step=k)
+    return omega ** np.arange(0, stop=N * k, step=k)
+
 
 def get_omega_matrix(N, inverse=False):
     omega = get_omega(N, inverse)
     n = np.arange(N)
     k = n.reshape((N, 1))
     return omega ** (k * n)
+
 
 def dft_matrix(x):
     """
@@ -25,6 +28,7 @@ def dft_matrix(x):
     This is the standard DFT matrix used in direct DFT computation.
     """
     return get_omega_matrix(len(x)) @ x
+
 
 def dft_halfwaythere(x):
     """
@@ -40,7 +44,7 @@ def dft_halfwaythere(x):
     for k in range(N):
         # The k-th row corresponds to the k-th harmonic
         # W_jk = (omega_base^k)^j. We compute this using Horner-like powers.
-        row_omega = omega_base ** k
+        row_omega = omega_base**k
         current_val = 1.0 + 0j
         for j in range(N):
             W[k, j] = current_val
@@ -68,6 +72,7 @@ def dft_horner(x):
         result[k] = current_val
 
     return result
+
 
 def fdft(x):
     """
@@ -106,12 +111,34 @@ def fdft(x):
 if __name__ == "__main__":
     signal0 = np.array([1.0, 2.0, 1.0, -1.0, 1.5, 3.0, 4.0, 2.0])
     signal1 = np.array([1.0, 2.0, 1.0, -1.0, 1.5, 2.5, 3.5, 2.0])
-    signal2 = np.array([1.0, 2.0, 1.0, -1.0, 1.5, 2.5, 3.5, 2.0, 1.0, 2.0, 1.0, -1.0, 1.5, 2.5, 3.5, 2.0])
-    for test_id, signal in enumerate((signal0, signal1, signal2,)):
-        print(
-            f"Testing case no.{test_id}"
-            f"\n{signal}..."
+    signal2 = np.array(
+        [
+            1.0,
+            2.0,
+            1.0,
+            -1.0,
+            1.5,
+            2.5,
+            3.5,
+            2.0,
+            1.0,
+            2.0,
+            1.0,
+            -1.0,
+            1.5,
+            2.5,
+            3.5,
+            2.0,
+        ]
+    )
+    for test_id, signal in enumerate(
+        (
+            signal0,
+            signal1,
+            signal2,
         )
+    ):
+        print(f"Testing case no.{test_id}\n{signal}...")
 
         res_matrix = dft_matrix(signal)
         res_horner = dft_horner(signal)

@@ -1,5 +1,6 @@
 from hilbert_space_utils import np
 
+
 def dot_product(vector_a, vector_b):
     """
     Compute the dot product of two vectors.
