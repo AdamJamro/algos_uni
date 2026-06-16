@@ -91,4 +91,4 @@ if __name__ == "__main__":
     print(f"Average tries to find min cut: {np.mean(times)}")
 
 
-    print(f"Example from a single run: Remaining vertices: {mincut_size}, Remaining edges: {mincut}")
+    print(f"Example from a single run: cut size: {mincut_size}, edges in cut: {mincut}")
